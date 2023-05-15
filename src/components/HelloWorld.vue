@@ -1,151 +1,142 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
+  <div>
+      <v-row>
+          <v-col cols="12" md="3" lg="3" xl="3">
+          <v-card>
+              <v-card-title style="background-color:#B2DFDB">Input Here</v-card-title>
+                  <v-card-text>
+                      <br/>
+                      <v-form ref="saveData" @submit.prevent="saveData">
+                          <v-text-field 
+                              label="ID Number"
+                              dense
+                              outlined
+                              v-model="form.idNumber"
+                              :rules="rules.required"
+                              :value="capitalizedForm.idNumber"
+                          />
+                          <label><b>Full Name</b></label>
+                          <v-text-field 
+                              label="Last Name"
+                              dense
+                              outlined
+                              v-model="form.lastName"
+                              :rules="rules.required"
+                              :value="capitalizedForm.lastName"
+                          />
+                          <v-text-field 
+                              label="First Name"
+                              dense
+                              outlined
+                              v-model="form.firstName"
+                              :rules="rules.required"
+                              :value="capitalizedForm.firstName"
+                          />
+                          <v-text-field 
+                              label="Middle Name"
+                              dense
+                              outlined
+                              v-model="form.middleName"
+                              :rules="rules.required"
+                              :value="capitalizedForm.middleName"
+                          />
+                          <v-btn type="submit" color="success" block>SAVE</v-btn>
+                      </v-form>
+                          
+                  </v-card-text>
+          </v-card>
       </v-col>
+      <v-col cols="12" md="9" lg="9" xl="9">
+          <v-card>
+              <v-card-title style="background-color:#B2DFDB">Summary</v-card-title>
+                  <v-card-text>
+                      <br/>
+                          <v-simple-table
+                              fixed-header
+                              height="60vh"
+                          >
+                              <thead>
+                                  <tr>
+                                      <th>ID No.</th>
+                                      <th>Last Name</th>
+                                      <th>First Name</th>
+                                      <th>Middle Name</th>
+                                      <th>Position</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr v-for="(item,i) in tableData" :key="i">
+                                      <td>{{ item.idNumber }}</td>
+                                      <td>{{ item.lastName }}</td>
+                                      <td>{{ item.firstName }}</td>
+                                      <td>{{ item.middleName }}</td>
+                                      <td></td>
+                                  </tr>
+                              </tbody>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
+                          </v-simple-table>
+                  </v-card-text>
+          </v-card>
       </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+      </v-row>
+      
+      
+  </div>
+  
 </template>
-
 <script>
-  export default {
-    name: 'HelloWorld',
-
-    data: () => ({
-      ecosystem: [
-        {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
-        },
-        {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-        },
-        {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
-        },
-        {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-        },
-      ],
-    }),
+export default {
+  data:()=>({
+      tableData:[],
+      form:{
+          idNumber:'',
+          lastName:'',
+          firstName:'',
+          middleName:''
+      },
+      rules:{
+          required: [
+              v => !!v || 'Field is required'
+          ],
+      },
+  }),
+  methods:{
+      saveData(){
+          if(this.$refs.saveData.validate()){
+              this.tableData.push(this.capitalizedForm)
+              this.form = {}
+              this.$refs.saveData.resetValidation();
+          }
+          
+          // console.log(this.tableData)
+     
+      },
+      capitilizedFirst(str){
+          if(str){
+              return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+          }else{
+              return '';
+          }
+         
+      }
+  },
+  computed:{
+      capitalizedForm(){
+          return{
+              idNumber: this.form.idNumber,
+              firstName: this.capitilizedFirst(this.form.firstName),
+              lastName: this.capitilizedFirst(this.form.lastName),
+              middleName: this.capitilizedFirst(this.form.middleName),
+          }
+      }
+  },
+  watch:{
+      // capitalizedForm(val){
+      //     console.log(val)
+      // },
+      // form(val){
+      //     console.log(val,'form')
+      // }
   }
+}
 </script>
